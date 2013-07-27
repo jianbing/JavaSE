@@ -5,90 +5,74 @@
 import java.util.Random;
 import java.util.Scanner;
 
+
 /**
  * Created by Administrator on 13-7-25.
  */
 public class Game {
-
+    private int n = 5;
     private static int[][] board = new int[5][5];
-    private static int m = board[0][0];
-    private int i1, i2, i3, i4, i5, i6;
-
+    private static int temp;//接受输入的值
+//    private static int m = board[0][0];
 
     public void setBoard() {
-
         Random random = new Random();
         Game game = new Game();
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                game.board[i][j] = random.nextInt(6);
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                game.board[i][j] = random.nextInt(5) + 1;
                 System.out.print(game.board[i][j] + "  ");
             }
             System.out.println();
-
         }
-
     }
 
-    public void start() {
-        i1 = 0;
-        for (int j = 1; j < board[i1].length; j++) {
-            if (board[i1][j] != board[i1][j - 1]) {
-                break;
-            }
-            i1 = j;
-        }
-        System.out.println("i1  " + i1);
-//
-//        for (int j = 0; j <= i1; j++) {
-//            for (int k = 1; k < board.length; k++) {
-//                if(board[k][j] !=board[k-1][j]){
-//                    break;
-//                }
-//                i2 = j;
-//                i3 = k - 1;
-//            }
-//
+    //    public void SelectedGrade(){
+//        System.out.println("S "+"M "+"L ");
+//        Scanner scanner=new Scanner(System.in);
+//        String s=scanner.nextLine().trim();
+//        if(s.equalsIgnoreCase("s")){
+//            n=5;
 //        }
-//        System.out.print("i3  " + i3 + "  ");
-//        System.out.println("i2  "+i2);
-//        for (int i = 1; i <= i3; i++) {
-//            for (int j = 1; j < board[i].length ; j++) {
-//                if(board[i][j] !=board[i][j-1]){
-//                    break;
-//                }
-//                i4 = i;
-//                i5 = j - 1;
-//            }
+//        else if(s.equalsIgnoreCase("m")){
+//            n=10;
 //        }
-//        System.out.print("i4  " + i4 + "   ");
-//        System.out.println("i5  "+i5);
-    }
-
-    public void iuput() {
-
-        boolean b = false;
+//        else if(s.equalsIgnoreCase("l")){
+//            n=15;
+//        }
+//    }
+    public static void input() {
+        System.out.println("input:");
         Scanner scanner = new Scanner(System.in);
-        System.out.print("iuput n :");
-        int n = scanner.nextInt();
-        while (b = false) {
-            if (n == m) {
-                n = scanner.nextInt();
-            } else {
-                b = true;
+        temp = scanner.nextInt();
+    }
+    public void PlayGame() {
+        boolean b = true;
+        while (b) {
+            Game.input();
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[i].length; j++) {
+                    if (board[i][j+1] != temp && board[i+1][j] != temp) {
+                        i = 0;
+                        b=false;
+                    } else {
+                        board[i][j] = temp;
+                    }
+                }
+            }
+            if(!b){
+                System.out.println("输入有误！");
+                //break;
             }
         }
-
 
     }
 
     public static void main(String[] args) {
-
         Game game = new Game();
+//        game.SelectedGrade();
         game.setBoard();
-        game.start();
-
-
+        game.PlayGame();
     }
 
 
