@@ -26,21 +26,6 @@ public class Game {
             System.out.println();
         }
     }
-
-    //    public void SelectedGrade(){
-//        System.out.println("S "+"M "+"L ");
-//        Scanner scanner=new Scanner(System.in);
-//        String s=scanner.nextLine().trim();
-//        if(s.equalsIgnoreCase("s")){
-//            n=5;
-//        }
-//        else if(s.equalsIgnoreCase("m")){
-//            n=10;
-//        }
-//        else if(s.equalsIgnoreCase("l")){
-//            n=15;
-//        }
-//    }
     public static void input() {
         System.out.println("input:");
         Scanner scanner = new Scanner(System.in);
@@ -50,13 +35,13 @@ public class Game {
         boolean b = true;
         while (b) {
             Game.input();
-            for (int i = 0; i < board.length; i++) {
-                for (int j = 0; j < board[i].length; j++) {
+            for (int i = 0; i < board.length-1; i++) {
+                for (int j = 0; j < board[i].length-1; j++) {
                     if (board[i][j+1] != temp && board[i+1][j] != temp) {
                         i = 0;
                         b=false;
                     } else {
-                        board[i][j] = temp;
+//                        board[i][j] = temp;
                     }
                 }
             }
@@ -67,7 +52,16 @@ public class Game {
         }
 
     }
-
+    public void judge(){
+        for (int i = 0; i <board.length-1 ; i++) {
+            for (int j = 0; j <board[i].length-1 ; j++) {
+                if(board[i][j]==board[i+1][j]&&board[i][j]==board[i][j+1]){
+                    board[i+1][j]=temp;
+                    board[i][j+1]=temp;
+                }
+            }
+        }
+    }
     public static void main(String[] args) {
         Game game = new Game();
 //        game.SelectedGrade();
